@@ -68,6 +68,8 @@ class Hero extends React.Component {
       .catch((err) => {
         console.log(err);
       })
+      console.log (this.state.productDetails, 'product')
+
   }
 
   changeColor(e) {
@@ -78,7 +80,7 @@ class Hero extends React.Component {
   render() {
     if (this.state.loadedData) {
       let { salePrice, retailPrice, images } = this.state.productDetails;
-      let sale = 100 - salePrice / retailPrice * 100;
+      let sale = Math.floor(100 - salePrice / retailPrice * 100);
       return (
         <div className={style.background}>
           <ProductInfoMobile details={this.state.productDetails} />
