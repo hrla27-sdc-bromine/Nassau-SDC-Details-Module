@@ -1,9 +1,16 @@
 # Logs
 logs
 *.log
+.DS_Store
+bower_components
+node_modules
+bundle.js
+db/data
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
 
 # Runtime data
 pids
