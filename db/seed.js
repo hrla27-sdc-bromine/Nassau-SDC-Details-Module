@@ -9,8 +9,8 @@ const  seedData =  async (data)  => {
 
 
 const insertAll = async () => {
-  for(let i=0; i< 1000; i++) {
-    await seedData(JSON.parse(fs.readFileSync(path.resolve(__dirname, `./data/${i}.json`))));
+  for(let i=0; i< 3; i++) {
+    await seedData(JSON.parse(fs.readFileSync(path.resolve(__dirname, `./data1/${i}.json`))));
     console.log('seeded file ' + i);
   }
 };

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/abibas', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/abibas1', { useNewUrlParser: true });
 mongoose.set('useCreateIndex', true);
 
 const db = mongoose.connection;
@@ -44,7 +44,9 @@ const productSchema = new mongoose.Schema({
   tags: [String],
   colors: [String],
   heartToggle: Boolean,
-  availableColors: [Number],
+  availableColors: {
+    type: [Number]
+  },
 });
 
 const Product = mongoose.model('Product', productSchema);

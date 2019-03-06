@@ -12,7 +12,7 @@ let colorArr = [];
 let idCount = 0;
 for (let i = 0; i < 3; i++) {
   let data = [];
-  for (let j = 0; j < 3; j++) {
+  for (let j = 0; j < 2; j++) {
     let product = {};
     product.productId = idCount;
     idCount += 1;
@@ -53,26 +53,25 @@ for (let i = 0; i < 3; i++) {
     product.salePrice = Math.floor(product.retailPrice * Math.random());
     product.reviewCount = randomNum(0, 1000);
     product.reviewRating = (Math.random() * 2.5 + 2.5),
-    product.tags = (faker.commerce.department().split(' '));
+    product.tags = faker.commerce.department().split(' ');
     product.colors = [];
     for (let j = 0; j < 3; j++) {
       product.colors.push(faker.commerce.color());
     }
-    if (colorArr.includes(product.productId)) {
-      product.availablecolors = colorArr 
+    if (!colorArr.includes(product.productId)) {
+      product.availablecolors = colorArr.slice() 
       } else {
-        product.availablecolors = []
         colorArr = []
         let colorCount = randomNum(1, 7);
         for (let a = 0; a < colorCount; a++) {
           colorArr.push(product.productId+a)
       }
-      product.availablecolors = colorArr
+      product.availablecolors = colorArr.slice()
     }
     product.heartToggle = false;
 
     data.push(product);
   }
-  console.log (JSON.stringify(data))
-  // fs.writeFileSync(`./db/data/${i}.json`, JSON.stringify(data));
+  
+  fs.writeFileSync(`./db/data1/${i}.json`, JSON.stringify(data));
 }
