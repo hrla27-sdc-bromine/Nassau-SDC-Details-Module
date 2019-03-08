@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./server/index.js",
+    "postgreStart": "nodemon ./serverPostgres/index.js",
+    "mongoStart": "nodemon ./serverMongo/index.js",
     "build": "webpack -d --watch",
     "seed": "node ./db/seed.js"
   },
