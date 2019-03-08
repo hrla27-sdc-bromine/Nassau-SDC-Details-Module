@@ -1,4 +1,4 @@
-const {fetchProduct, deleteItem} = require('../mongoDB/models.js');
+const {fetchProduct, deleteItem, addItem} = require('../mongoDB/models.js');
 
 
 module.exports = {
@@ -19,17 +19,39 @@ module.exports = {
       if (err) {
         res.status(404).end();
       } else {
-        res.status(202).end();
+        res.status(202).send('deleted');
       }
     })
   },
 
   updateProduct: (req, res) => {
-
+    
   },
 
   addProduct: (req, res) => {
-
+    let {name, sizes, images, tags, colors, availableColors, productId, retailPrice, salePrice, reviewCount, reviewRating, heartToggle} = req.body;
+    let product = {}
+    product.colors=colors;
+    product.name=name;
+    product.sizes=sizes;
+    product.images=images;
+    product.tags=tags;
+    product.availableColors=availableColors;
+    product.productId=productId;
+    product.retailPrice=retailPrice;
+    product.salePrice=salePrice; 
+    product.reviewRating; 
+    product.reviewCount;
+    product.heartToggle=heartToggle;
+    addItem(product, (err, data) => {
+      if (err) {
+        console.log ('error in sending')
+        res.status(404).end();
+      } else {
+        console.log ('sending data in Controller')
+        res.status(201).send(data);
+      }
+    });
   }
 
 };
