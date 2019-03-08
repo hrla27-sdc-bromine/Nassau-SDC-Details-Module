@@ -12,6 +12,7 @@ class Hero extends React.Component {
     this.state = {
       loadedData: false,
       productDetails: null,
+
         /* Example Details
           availableColors: [1, 2, 3]
           colors: ["Cloud White", "Grey", "Ash Pearl"]
@@ -42,8 +43,9 @@ class Hero extends React.Component {
 
   fetchProduct(productId) {
     axios
-      .get('/abibas/product', { params: { id: productId } })
+      .get(`/abibas/product/${productId}`)
       .then((response) => {
+        console.log (response.data, 'response in fetchProduct')
         this.setState({
           productDetails: response.data.product,
           availableColorImages: response.data.colorThumbnails,
@@ -53,12 +55,14 @@ class Hero extends React.Component {
       .catch((err) => {
         console.log(err);
       })
+      console.log (this.state)
   }
 
   fetchProductColor(productId) {
     axios
-      .get('/abibas/color', { params: { id: productId } })
+      .get(`/abibas/color/${productId}`)
       .then((response) => {
+        console.log (response, 'response in fetchProductColor')
         this.setState({
           productDetails: response.data.product,
           availableColorImages: response.data.colorThumbnails,

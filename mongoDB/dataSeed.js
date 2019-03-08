@@ -1,8 +1,8 @@
 const { Product } = require('./index.js');
 const generateData = require('./generateData.js');
 const path = require('path');
-const cmd = require ('node-cmd');
-const Promise = require ('bluebird');
+let cmd = require ('node-cmd');
+const Promise = require('bluebird');
 cmd = Promise.promisifyAll(cmd);
 
 Product.find().then(data => {
@@ -11,7 +11,7 @@ Product.find().then(data => {
       console.log ('data generated, beginning seeding');
     cmd
       .runAsync(
-        `mongoimport --db abibas1 --collection products --file ${path.resolve(
+        `mongoimport --db abibas --collection products --file ${path.resolve(
           __dirname,
           './data.json'
         )} --jsonArray`

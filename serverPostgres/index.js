@@ -5,7 +5,10 @@ const cors = require('cors');
 const morgan = require('morgan');
 const PORT = 3002;
 
-const { fetchProduct } = require('./controllers.js');
+const router = require ('./postgresRouter.js');
+
+// const { fetchProduct } = require('..//mongoControllers.js');
+// const { fetchProduct } = require('./postgresControllers.js');
 
 const app = express();
 
@@ -18,4 +21,4 @@ app.use(express.static(path.resolve(__dirname, '../client/dist')));
 app.use('/abibas/product', fetchProduct);
 app.use('/abibas/color', fetchProduct);
 
-app.listen(PORT, () => console.log('Listening on PORT', PORT));
+app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));

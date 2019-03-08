@@ -3,37 +3,35 @@ const faker = require('faker');
 
 faker.seed(22);
 
-const randNum = (low, high) => {
-  Math.floor(Math.random() * (high - low) + low);
+randNum = (low, high) => {
+  return Math.floor(Math.random() * (high - low) + low);
 };
-
-const possibleSizes = [
-  '5',
-  '5h',
-  '6',
-  '6h',
-  '7',
-  '7h',
-  '8',
-  '8h',
-  '9',
-  '9h',
-  '10',
-  '10h',
-  '11',
-  '11h',
-  '12',
-  '12h',
-  '13'
-];
-
 
 class DataStream extends Readable {
   constructor (options) {
     super (options);
     this.idCount = 0;
-    
-    this.availableColors = [];;
+    this.possibleSizes = [
+      '5',
+      '5h',
+      '6',
+      '6h',
+      '7',
+      '7h',
+      '8',
+      '8h',
+      '9',
+      '9h',
+      '10',
+      '10h',
+      '11',
+      '11h',
+      '12',
+      '12h',
+      '13'
+    ];
+
+    this.relatedColors = [];;
   }
 
   _read(size) {
@@ -42,11 +40,11 @@ class DataStream extends Readable {
     //productId
     product.productId = this.idCount;
 
-    if (!this.availableColors.includes(this.idCount)) {
-      this.availableColors = [];
+    if (!this.relatedColors.includes(this.idCount)) {
+      this.relatedColors = [];
       let colorNum = randNum(1, 6); 
       for (let color = 0; color < colorNum; color++) {
-        this.availableColors.push(this.idCount+color);
+        this.relatedColors.push(this.idCount+color);
       }
     }
     this.idCount++;
@@ -65,7 +63,7 @@ class DataStream extends Readable {
 
     //sizes
     product.sizes = {};
-    for (let size of possibleSizes) {
+    for (let size of this.possibleSizes) {
       let sizeCount = randNum(0, 12)
       product.sizes[size] = sizeCount;
     };
@@ -94,20 +92,20 @@ class DataStream extends Readable {
     };
 
     //availableColors
-    let colorSize = this.availableColors.length;
+    product.availableColors = [];
+    let colorSize = this.relatedColors.length;
       for (let i = 0; i < colorSize; i++) {
-        product.availableColors.push(this.availableColors[i]);
+        product.availableColors.push(this.relatedColors[i]);
       };
 
     //heartToggle
     product.heartToggle = false;
     
     if (this.idCount === 1) this.push('[');
-      this.push(JSON.stringify(product) + (this.idCount === 14 ? ']' : ','));
-    if (this.idCount === 14) this.push(null);
-    // this.push(JSON.stringify(product) + (this.idCount === 1e7 ? ']' : ','));
-    // if (this.idCount === 1e7) this.push(null);
-    // if (this.idCount === 10) this.push(null)
+    //   this.push(JSON.stringify(product) + (this.idCount === 14 ? ']' : ','));
+    // if (this.idCount === 14) this.push(null);
+    this.push(JSON.stringify(product) + (this.idCount === 1e7 ? ']' : ','));
+    if (this.idCount === 1e7) this.push(null);
   }
 }
 

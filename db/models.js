@@ -3,10 +3,11 @@ const Promise = require('bluebird');
 
 
 module.exports = {
-  fetch: (productId, callback) => {
-    Product.findOne({ productId: productId })
+  fetch: (id, callback) => {
+    Product.find({ productId: id })
       .then((data) => {
         let promises = [];
+        console.log (data, 'data in models.js of db')
 
         for (let id of data.availableColors) {
           promises.push(new Promise((resolve, reject) => {
@@ -34,3 +35,4 @@ module.exports = {
       });
   }
 };
+
