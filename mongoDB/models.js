@@ -34,14 +34,27 @@ module.exports = {
       });
   },
 
-  deleteItem: (productId, callback) => {
-    Product.deleteOne({ productId: productId })
-      .then (product => {
-        res.json (product)
+  deleteItem: (id, callback) => {
+    Product.deleteOne({ productId: id })
+      .then ((success) => {
+        console.log ('deleted in ModelsMongo')
+        callback(null, success)
       })
-      .catch (error => {
-        res.status(400).send(`error processing request: ${error}`)
+      .catch((error) => {
+        console.log ('error in delete function Mongo')
+        callback(error, null)
+      });
+  },  
+
+  addItem: (product, callback) => {
+    console.log (product, 'product in modules')
+    Product.create(product)
+      .then(() => {
+        console.log ('hit success')
       })
-      console.timeEnd('Fetch');
-    },
+      .catch((error) => {
+        console.log (error, 'catch a error')
+        callback(error, null)
+      })
+  }
 };
