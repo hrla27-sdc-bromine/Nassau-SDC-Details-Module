@@ -1,9 +1,9 @@
 const fs = require ('fs');
-const dataStream = require ('./dataStream.js');
+const {DataStream} = require ('./dataStream.js');
 
 const writeDataToFile = () => {
-  const file = fs.createWriteStream('./postgresDB/data.csv');
-  const data = new dataStream();
+  const file = fs.createWriteStream(`./postgresDB/data.csv`, { mode: 0o755 });
+  const data = new DataStream();
   const write = data.pipe(file);
   return new Promise((res, rej) => {
     write.on('finish', res);

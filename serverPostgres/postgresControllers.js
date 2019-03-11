@@ -1,18 +1,63 @@
-const { fetch } = require('../postgresDB/models.js');
+const { dbFetch, dbDelete, dbUpdate, dbCreate } = require('../postgresDB/models.js');
 
 module.exports = {
-  fetchProduct: (req, res) => {
+  getProduct: (req, res) => {
     console.time('Fetch')
-  
-    let productId = req.query.id;
-    fetch(productId, (err, data) => {
-      if (err) {
-        console.log (err, 'error')
-        res.status(404).end(err);
-      } else {
-        console.timeEnd('Fetch');
-        res.status(200).send(data);
-      }
-    });
-  }
+    let productId = Number(req.params.id);
+    dbFetch(productId)
+      .then((product) => {
+        if (product) {
+          res.status(200).json(product);
+        } else {
+          console.log ('in error of controllers')
+          res.status(404).end();
+        }
+      })
+      .catch(() => {
+        console.log ('in catch')
+        res.status(404).end();
+      });
+      console.timeEnd('Fetch');
+  },
+
+  deleteProduct: (req, res) => {
+    console.time('Fetch')
+    let productId = Number(req.params.id);
+    dbDelete(productId)
+      .then(()=> {
+        res.status(200).json('delete successful')
+      })
+      .catch(() => {
+        res.status(404).end()
+      });
+    console.timeEnd('Fetch')
+  },
+
+  updateProduct: (req, res) => {
+    console.time('Fetch')
+    let updateItem = req.body;
+    let productId = Number(req.params.id)
+    dbUpdate(productId, updateItem)
+      .then((productId) => {
+        res.status(200).end(productId)
+      })
+      .catch(() => {
+        res.status(404).end()
+      })
+    console.timeEnd('Fetch')
+  },
+
+  addProduct: (req, res) => {
+    console.time ('Fetch')
+    let product = req.body;
+    dbCreate(product)
+      .then((productId) => {
+        res.status(201).json(Object.assign({productId}, product))
+      })
+      .catch(() => {
+        res.status(404).end()
+    })
+    console.timeEnd('Fetch')
+  },
+
 };
