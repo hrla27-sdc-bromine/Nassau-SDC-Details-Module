@@ -1,8 +1,9 @@
 const { Pool } = require ('pg');
 
-const pgPool = new Pool( {
-  user: 'postgres', host: '54.92.163.217', database: 'abibas', password: 'password', port: 5432
-});
+// const pgPool = new Pool( {
+//   user: 'shlomo', host: 'LOCALHOST', database: 'abibas', password: null, port: 5432
+// });
+const pgPool = new Pool();
 
 module.exports.dbSchema = async () => {
   let client = await pgPool.connect();
@@ -36,7 +37,6 @@ module.exports.dbSchema = async () => {
     ON "products" USING hash ("productId")`
   );
   client.release();
-
 };
 
 module.exports.pgPool =  pgPool; 
