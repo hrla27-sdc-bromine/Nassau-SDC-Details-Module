@@ -1,15 +1,17 @@
 const { Pool } = require ('pg');
 
-const pgPool = new Pool();
+const pgPool = new Pool( {
+  user: 'postgres', host: '54.92.163.217', database: 'abibas', password: 'password', port: 5432
+});
 
 module.exports.dbSchema = async () => {
-  let client = await pgPool.connect().catch(err => console.log('err',err));
+  let client = await pgPool.connect();
 
   await client.query (
     `CREATE TABLE IF NOT EXISTS "products" (
       "productId" SERIAL, 
       "name" VARCHAR (150), 
-      "images" VARCHAR(250) [], 
+      "images" VARCHAR(250) [],   
       "sizes" JSON,
       "retailPrice" SMALLINT,
       "salePrice" SMALLINT,
@@ -21,7 +23,8 @@ module.exports.dbSchema = async () => {
       "heartToggle" BOOLEAN,
       PRIMARY KEY ("productId")
     )`
-  );
+  )
+  .catch ((error) => console.log (error, 'error on line 27'))
 
   await client.query (
     `CREATE INDEX IF NOT EXISTS "products_name"

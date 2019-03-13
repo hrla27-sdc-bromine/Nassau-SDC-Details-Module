@@ -12,12 +12,12 @@ module.exports = {
           console.log ('in error of controllers')
           res.status(404).end();
         }
+        console.timeEnd('Fetch');
       })
       .catch(() => {
         console.log ('in catch')
         res.status(404).end();
       });
-      console.timeEnd('Fetch');
   },
 
   deleteProduct: (req, res) => {

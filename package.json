@@ -4,7 +4,7 @@
   "description": "Nassau-SDC Details Module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "postgreStart": "nodemon ./serverPostgres/index.js",
     "mongoStart": "nodemon ./serverMongo/index.js",
     "build": "webpack -d --watch",
@@ -30,6 +30,7 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
+    "jest": "^24.5.0",
     "webpack": "^4.29.2",
     "webpack-cli": "^3.2.3"
   },
@@ -44,7 +45,6 @@
     "express": "^4.16.4",
     "faker": "^4.1.0",
     "fs": "0.0.1-security",
-    "jest": "^24.3.1",
     "mongoose": "^5.4.10",
     "morgan": "^1.9.1",
     "newrelic": "^5.6.0",

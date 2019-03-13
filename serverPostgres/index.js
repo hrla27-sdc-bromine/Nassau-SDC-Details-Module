@@ -45,4 +45,4 @@ launchApp()
 // })
 
 
-// module.exports = {app, startingApp}
+module.exports = {app, launchApp}
