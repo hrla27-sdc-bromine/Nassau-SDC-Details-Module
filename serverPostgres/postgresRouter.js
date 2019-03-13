@@ -1,4 +1,3 @@
-const express = require ('express');
 const router = require ('express').Router();
 const {getProduct, deleteProduct, updateProduct, addProduct} = require ('./postgresControllers.js');
 

@@ -59,5 +59,4 @@ module.exports = {
     })
     console.timeEnd('Fetch')
   },
-
 };

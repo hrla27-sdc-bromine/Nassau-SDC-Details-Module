@@ -1,10 +1,11 @@
-// require ('newrelic');
+// const newRelic = require ('newrelic');
 
 const express = require('express');
 const path = require('path');
 const parser = require('body-parser');
-const cors = require('cors');
-const morgan = require('morgan');
+
+// const cors = require('cors');
+// const morgan = require('morgan');
 
 const dotenv = require('dotenv');
 const dotenvExpand = require('dotenv-expand');
@@ -25,8 +26,6 @@ const app = express();
 
 launchApp = async () => {
   await dbSchema();
-  app.use(morgan('dev'));
-  app.use(cors());
 
   app.use(parser.json());
   app.use(parser.urlencoded({ extended: true }));
@@ -40,9 +39,6 @@ launchApp()
 .then(() => {
   app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`))
  })
-// .catch((error) => {
-//   console.log (error,'error')
-// })
 
 
 module.exports = {app, launchApp}
