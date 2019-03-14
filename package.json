@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "postgreStart": "nodemon ./serverPostgres/index.js",
+    "prod": "node ./serverPostgres/index.js",
     "mongoStart": "nodemon ./serverMongo/index.js",
     "build": "webpack -d --watch",
     "seed": "node ./db/seed.js"
