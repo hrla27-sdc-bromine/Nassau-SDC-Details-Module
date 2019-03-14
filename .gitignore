@@ -7,6 +7,11 @@ node_modules
 bundle.js
 db/data
 
+postgresDB/dataSeed.js
+postgresDB/dataStream.js
+postgresDB/generateData.js
+
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
