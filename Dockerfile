@@ -1,6 +1,6 @@
 FROM node:11
 WORKDIR /usr/src/app
-COPY package ./
+COPY package* ./
 RUN npm install --production
 COPY . . 
 EXPOSE 3002
